@@ -32,7 +32,11 @@
     "typeface-montserrat": "0.0.75"
   },
   "devDependencies": {
-    "prettier": "2.2.1"
+    "autoprefixer": "^10.1.0",
+    "gatsby-plugin-postcss": "^3.4.0",
+    "postcss": "^8.2.2",
+    "prettier": "2.2.1",
+    "tailwindcss": "^2.0.2"
   },
   "homepage": "https://ruarfff.com",
   "main": "n/a",
