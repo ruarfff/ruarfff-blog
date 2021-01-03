@@ -46,6 +46,8 @@ module.exports = {
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-smartypants`,
           `gatsby-remark-liquid-tags`,
+          `@weknow/gatsby-remark-twitter`,
+          `gatsby-remark-embed-spotify`,
         ],
       },
     },

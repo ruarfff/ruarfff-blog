@@ -34,7 +34,7 @@ A brief list of the best tools I discovered and used recently.
 
 When I worked at Spotify I was blown away by the internal tooling and how quickly I could get set up and deploying code. I got to use an early version of the developer portal there which has since been opensourced. We are using this at my company now and it's really worth a look if you want a nice way to do internal tooling.
 
-{% github backstage/backstage %}
+[Backtsage GitHub repo](https://github.com/backstage/backstage)
 
 **[Hashicorp Boundary](https://www.hashicorp.com/blog/hashicorp-boundary)**
 
@@ -44,7 +44,7 @@ Most access tools I've had to use kind of suck if your job is actually making st
 
 GitHub CLI is a great tool and a lot of fun to use.
 
-{% github cli/cli %}
+[GitHub CLI repo](https://github.com/cli/cli)
 
 **[Sizzy](https://sizzy.co/)**
 
@@ -78,7 +78,7 @@ This is my admittedly poor attempt so far: <https://github.com/ruarfff/screeps-s
 
 This massive list of resources to learn and practice with:
 
-{% github charlax/professional-programming %}
+<https://github.com/charlax/professional-programming>
 
 ## Good News <a name="good-news"></a>
 
@@ -133,7 +133,7 @@ Some tips on working on a side project while not immediately having to quit the 
 
 If you ever worked at a "big corp", you have probably encountered pain with certs on the network. This series helped me understand this stuff better and I learned a bit of rust too:
 
-{% link https://dev.to/wayofthepie/a-rust-cli-for-decoding-certs-280i %}
+<https://dev.to/wayofthepie/a-rust-cli-for-decoding-certs-280i>
 
 Bit of a cheat here since this site isn't really on tech but it isn't 100% not tech either and I love it a lot: <https://www.brainpickings.org/>
 
@@ -181,40 +181,40 @@ This just looks so cool and I want one: <https://www.clockworkpi.com/devterm>
 
 On needing a good strategy and vision from your leadership (a thread):
 
-{% twitter 1338224893645651968 %}
+https://twitter.com/johncutlefish/status/1338224893645651968
 
 On things going bad in a rewrite and sunk cost fallacy (a thread):
 
-{% twitter 1336893874904567808 %}
+https://twitter.com/stantwinb/status/1336893874904567808
 
 A profound thought on hackathons:
 
-{% twitter 1320165499863396352 %}
+https://twitter.com/bethcodes/status/1320165499863396352
 
 It's always DNS:
 
-{% twitter 1313858239298260993 %}
+https://twitter.com/makdaam/status/1313858239298260993
 
 Interesting war story (a thread):
 
-{% twitter 1312536583401160704 %}
+https://twitter.com/johncutlefish/status/1312536583401160704
 
-On being an opensource dev (need to click into it to see images properly):
+On being an opensource dev:
 
-{% twitter 1310776927599423489 %}
+https://twitter.com/_jayphelps/status/1310776927599423489
 
 Same:
 
-{% twitter 1306613673952149504 %}
+https://twitter.com/seanmcarroll/status/1306613673952149504
 
 GraphQL VS Rest:
 
-{% twitter 1303673198500814848 %}
+https://twitter.com/__xuorig__/status/1303673198500814848
 
 How I felt when I saw JSS:
 
-{% twitter 1303268890638778368 %}
+https://twitter.com/iamdevloper/status/1303268890638778368
 
 ## Coding Music <a name="coding-music"></a>
 
-{% spotify spotify:playlist:5e1dfPbE4qElO9wCQ2AOCm %}
+https://open.spotify.com/playlist/5e1dfPbE4qElO9wCQ2AOCm?si=cD2-ZYDnSsu8aENDufNP5A

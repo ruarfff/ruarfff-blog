@@ -31,9 +31,11 @@
     "typeface-montserrat": "0.0.75"
   },
   "devDependencies": {
+    "@weknow/gatsby-remark-twitter": "^0.2.3",
     "autoprefixer": "^10.1.0",
     "gatsby-plugin-google-gtag": "^2.5.0",
     "gatsby-plugin-postcss": "^3.4.0",
+    "gatsby-remark-embed-spotify": "^2.1.1",
     "gatsby-remark-liquid-tags": "^1.1.6",
     "postcss": "^8.2.2",
     "prettier": "2.2.1",
