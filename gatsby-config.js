@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: `Ruarfff Blog`,
+    title: `Ruairí's Blog`,
     author: {
-      name: `Ruairi O'Brien`,
+      name: `Ruairí O'Brien`,
       summary: `who wants to be good.`,
     },
     description: `A blog.`,
@@ -73,11 +73,9 @@ module.exports = {
     `gatsby-plugin-postcss`,
     {
       resolve: `gatsby-plugin-google-gtag`,
-      options: {  
-        trackingIds: [
-          "G-J8S0YBL54N",
-        ],
-    }
-  },
+      options: {
+        trackingIds: ["G-J8S0YBL54N"],
+      },
+    },
   ],
 }
