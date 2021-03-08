@@ -42,11 +42,11 @@ The next section will show a sample app to test out the methods we will use but 
 
 We will use an app based on backstage.
 
-{% github backstage/backstage no-readme %}
+<https://github.com/backstage/backstage>
 
 This is a useful example as we can configure it to use GitHub auth to allow users to login and interact with GitHub. The actual sample app for this is here:
 
-{% github ruarfff/backstage-example no-readme %}
+<https://github.com/ruarfff/backstage-example>
 
 By default this example app is expecting 3 environment variables to exist.
 
