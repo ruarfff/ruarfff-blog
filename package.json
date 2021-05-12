@@ -37,7 +37,7 @@
     "gatsby-plugin-postcss": "^3.4.0",
     "gatsby-remark-embed-spotify": "^2.1.1",
     "gatsby-remark-liquid-tags": "^1.1.6",
-    "postcss": "^8.2.2",
+    "postcss": "^8.2.10",
     "prettier": "2.2.1",
     "tailwindcss": "^2.0.2"
   },
