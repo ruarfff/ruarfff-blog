@@ -11,7 +11,7 @@ tags:
 I wanted a thing to only happen when a pull request is opened. I also wanted to do some cleanup when the pull request is closed. In my last place we used GitHub actions and this was super easy.
 Now I am using [CircleCI](https://circleci.com/) and this wasn't so easy.
 
-In this post we will look at how to only run a job on a pull request in CircleCI. There is one major caveat. We also need a way to trigger the job on a pull request. We will look at how to do this with CircleCI webhooks.
+In this post we will look at how to only run a job on a pull request in CircleCI. There is one major caveat. We also need a way to trigger the job on a pull request. We will look at how to do this with the [CircleCI web api](https://circleci.com/docs/api/v2/).
 
 ## Conditionally run a job
 
@@ -61,7 +61,7 @@ workflows:
                   echo '{ "is_pr": '$IS_PR' }' >> /home/circleci/params.json
 ```
 
-Note, we mentioning PR here but you could do more or less anything to configure your pipeline there. `/home/circleci/params.json` is written to and specified as with `parameters: /home/circleci/params.json`.
+Note, we mentioning PR here but you could do more or less anything to configure your pipeline there. `/home/circleci/params.json` is written to and specified with `parameters: /home/circleci/params.json`.
 
 `.circleci/main.yml`
 
