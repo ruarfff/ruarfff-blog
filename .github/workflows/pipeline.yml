@@ -6,15 +6,9 @@ on:
 jobs:
   build-and-deploy:
     permissions:
-      pages: write # to deploy to Pages
-      id-token: write
+      contents: write
 
     runs-on: ubuntu-latest
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v2
@@ -26,11 +20,11 @@ jobs:
           yarn
           yarn build
 
-      - name: upload
-        uses: actions/upload-pages-artifact@v1
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@4
         with:
-          path: "public/"
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v1
+          branch: main
+          folder: public
+          clean: true
+          repository-name: ruarfff/ruarfff.github.io
+          token: ${{ secrets.ACCESS_TOKEN }}
