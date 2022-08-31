@@ -178,6 +178,9 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
+
+![Async example](./async1.png)
+
 This contrived example shows a simple case where asynchronous code got things done faster than blocking code.
 
 Running 2 tasks that each take 2 seconds asynchronously allows them to be finished in 2 seconds.
@@ -228,6 +231,8 @@ def main():
 if __name__ == "__main__":
     main()
 ```
+
+![GIL Output](./gil.png)
 
 If multiple threads are updating references, you might get an accidental garbage collection or a memory leak. The lock is there to ensure this doesn't happen and garbage collection is done safely.
 
@@ -315,6 +320,13 @@ In another console, run curl:
 
 You should see output similar to the following:
 
+```
+{"message":"Hello World"}{"message":"Hello World"}{"message":"Hello World"}{"message":"Hello World"}{"message":"So slow"}{"message":"So slow"}
+```
+
+In the application logs:
+![Async example output](./async-normal.png)
+
 That was perhaps too fast to prove anything.
 
 Update your endpoint with `await asyncio.sleep(4)`:
@@ -332,6 +344,9 @@ async def root():
 ```
 
 Run the test again:
+
+![Async example with ait output](./async-normal-waiting.png)
+
 
 Despite each call not responding for 4 seconds, they all kicked off at the same time. FastAPI is handling requests asynchronously.
 
@@ -367,6 +382,9 @@ The order is important. We want the slow ones to kick off first.
 Update the curl command to allow 6 concurrent requests:
 
 `curl --parallel --parallel-immediate --parallel-max 6 --config test_urls.txt`
+
+
+![Async with bloging example output](./sync-oops.png)
 
 Oops! We just blocked all requests from being processed.
 
