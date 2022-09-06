@@ -1,7 +1,7 @@
 ---
-title: Understanding python async
+title: Understanding python async with FastAPI
 date: "2022-08-26"
-description: Async python with asyncio
+description: Understanding async python with asyncio and fastapi
 ---
 
 Writing asynchronous code in python is quite powerful and can perform pretty well if you use something like [uvloop](https://uvloop.readthedocs.io/):
