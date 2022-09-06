@@ -23,11 +23,24 @@ In this post we will look at:
 
 ## Coding along
 
-Make sure to have python >= 3.8 installed.
+Grab the sample code:
+
+- `git clone git@github.com:ruarfff/understanding-python-async.git && cd understanding-python-async`
+- You should also have [curl](https://curl.se/) installed
+
+You can use docker (recommended) or setup your own python environment.
+
+### With docker
+
+```
+make build
+```
+
+### Without docker
+
+If you're not using docker, make sure to have python >= 3.8 installed.
 
 You should be using a unix like shell e.g. Linux, Mac, WSL.
-
-My setup (you don't need to use this exact version):
 
 - [pyenv](https://github.com/pyenv/pyenv)
 
@@ -36,8 +49,6 @@ pyenv install 3.10.6
 
 pyenv global 3.10.6
 ```
-
-- `git clone git@github.com:zoe/understanding-python-async.git && cd understanding-python-async`
 
 - Setup a [virtual environment](https://docs.python.org/3/library/venv.html) and run all commands in this context
 
@@ -49,7 +60,7 @@ source .venv/bin/activate
 
 - Install requirements `pip install -r requirements.txt`
 
-- You should also have [curl](https://curl.se/) installed
+In the examples below, runt he python scripts directly instead of using `make`.
 
 ## Async Vs Parallel
 
@@ -178,6 +189,11 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
+Run it:
+
+```
+make async-example
+```
 
 ![Async example](./async1.png)
 
@@ -189,7 +205,7 @@ If you await 2 async functions in sequence, it's sort of like it was done synchr
 
 ## It's Async all the way down
 
-An important note that took me a few mistakes to understand, you must use async all the way down. If you block at any point within an async function, you block everything.
+You must use async all the way down. If you block at any point within an async function, you block everything.
 
 We will explore this more in the FastAPI section but for now, it's important to be aware that this:
 
@@ -314,9 +330,9 @@ Start your FastAPI app:
 
 `uvicorn src.fastapi_example:app --reload`
 
-In another console, run curl:
+In another console, run the test script:
 
-`curl --parallel --parallel-immediate --parallel-max 4 --config test_urls.txt`
+`./test-endpoints.sh`
 
 You should see output similar to the following:
 
@@ -347,7 +363,6 @@ Run the test again:
 
 ![Async example with ait output](./async-normal-waiting.png)
 
-
 Despite each call not responding for 4 seconds, they all kicked off at the same time. FastAPI is handling requests asynchronously.
 
 Now to demonstrate where things can go wrong, let's add another endpoint:
@@ -366,7 +381,7 @@ async def slow():
 
 Here's we're using the blocking `time.sleep` instead of the non blocking `asyncio.sleep`.
 
-Update the urls.txt file:
+Use the `curl_configs/test_urls_slow.txt` file:
 
 ```
 url = "http://127.0.0.1:8000/slow"
@@ -381,10 +396,9 @@ The order is important. We want the slow ones to kick off first.
 
 Update the curl command to allow 6 concurrent requests:
 
-`curl --parallel --parallel-immediate --parallel-max 6 --config test_urls.txt`
+`curl --parallel --parallel-immediate --parallel-max 6 --config curl_configs/test_urls_slow.txt`
 
-
-![Async with bloging example output](./sync-oops.png)
+![Async with blocking example output](./slow.png)
 
 Oops! We just blocked all requests from being processed.
 
@@ -406,7 +420,7 @@ def sync_slow():
 
 Notice, we are not specifying `async` on the function definition.
 
-Update our test URLs:
+Use the `curl_configs/test_urls_sync_slow.txt` file:
 
 ```
 url = "http://127.0.0.1:8000/sync-slow"
@@ -415,7 +429,11 @@ url = "http://127.0.0.1:8000/"
 url = "http://127.0.0.1:8000/"
 url = "http://127.0.0.1:8000/"
 url = "http://127.0.0.1:8000/"
+
+`curl --parallel --parallel-immediate --parallel-max 6 --config curl_configs/test_urls_sync_slow.txt`
 ```
+
+![Async with example output](./sync-slow.png)
 
 If you don't specify your endpoint as being async i.e. as [a coroutine](https://docs.python.org/3/library/asyncio-task.html), FastAPI will look after it for you instead as it will assume this route contains blocking calls whereas if you specify `async`, it's up to you to make sure it really is asynchronous.
 
@@ -442,9 +460,13 @@ To illustrate, let's add some pubsub:
 
 This example is pretty contrived and GCP specific but does demonstrate a common mistake.
 
-If you'd like to follow along please [install the gcloud cli](https://cloud.google.com/sdk/docs/install) and run the following to start a pubsub emulator:
+If you don't want to use docker and would like to follow along please [install the gcloud cli](https://cloud.google.com/sdk/docs/install) and run the following to start a pubsub emulator:
 
 `gcloud beta emulators pubsub start --project=example-project`
+
+`$(gcloud beta emulators pubsub env-init)`
+
+If you are using docker compose, the emulator is already setup for you in the sample code.
 
 We are doing this so we can see what happens when our FastAPI application listens to messages out side of standard web requests.
 
@@ -545,37 +567,57 @@ if __name__ == "__main__":
 
 ```
 
-We are going to send some messages to our app and see how it responds in different scenarios. The client uses environment variables to connect to the emulator. You must load the environment variables like so:
+We are going to send some messages to our app and see how it responds in different scenarios.
 
-`$(gcloud beta emulators pubsub env-init)`
-
-So at this point you should have:
-
-- a running pubsub emulator
-- a sample client with the emulator environment variables ready to go in the shell
-
-Run the client:
+Start the app:
 
 ```
-❯ python src/pubsub_client.py
-Topic already exists
+make up
+```
+
+Run the client in another session:
+
+```
+make pubsub
+```
+
+Or if you are not using docker:
+
+```
+python src/pubsub_client.py
+```
+
+You should see something like:
+
+```
+Created topic: projects/example-project/topics/testing
 Run 5 non-blocking
-183
-184
-185
-186
-187
+1
+2
+3
+4
+5
 Run 5 blocking
-188
-189
-190
-191
-192
+6
+7
+8
+9
+10
+
 ```
 
 You should see output int he app console like this:
+![Pubsub output](./pubsub_output.png)
 
 All the messages were processed asynchronously. The pubsub is using a callback and the eventloop used by FastAPI is not effected.
+
+### Where async + pubsub can go wrong
+
+You may be tempted to use something like [gcloud-aio-pubsub](https://pypi.org/project/gcloud-aio-pubsub/) with your fastapi app. You can use something like [nest-asyncio](https://pypi.org/project/nest-asyncio/) to hook into the fastapi eventloop. This will allow you to use the same eventloop for your pubsub client and let you use standard async await with event handling.
+
+You should avoid this however. It is very easy to add a blocking call into an event handler. This will block the event loop and prevent any other events and web requests from being processed thus holding up your whole application.
+
+It is advisable to keep it simple. Let fastapi deal with the complexity of asyncio and use a background thread for pubsub.
 
 ## Useful links
 
@@ -600,3 +642,7 @@ All the messages were processed asynchronously. The pubsub is using a callback a
 - https://www.uvicorn.org/
 
 - https://stackoverflow.com/questions/41063331/how-to-use-asyncio-with-existing-blocking-library
+
+```
+
+```
